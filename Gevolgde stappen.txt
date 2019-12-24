@@ -1,0 +1,11 @@
+In Visual Studio 2017: (normaliter gebruik ik 2019 maar deze was 'toevallig' geïnstalleerd)
+Create new .NET Core project 'Web API'.
+Swagger installeren: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio
+Post a file in .NET Core web API: https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
+Read Excel file from stream .NET Core: https://social.msdn.microsoft.com/Forums/office/en-US/66179d82-b237-4e79-9cc3-23291140c676/reading-xlsx-file-line-by-line-in-c?forum=officegeneral
+No data is available for encoding 1252 error: https://stackoverflow.com/questions/50858209/system-notsupportedexception-no-data-is-available-for-encoding-1252/50875725
+AutoMapper gebruiken om een mapping te definiëren in code: https://code-maze.com/automapper-net-core/
+Ninject gebruiken voor dependency injection: https://dev.to/cwetanow/wiring-up-ninject-with-aspnet-core-20-3hp
+Gebruik DataSetExtensions voor syntactic sugar in de automapper: https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto/35418320
+Logica van Excel naar DataSet in een apart project stoppen om het te isoleren voor unit testing.
+Maak .gitignore voor .NET Core: https://github.com/dotnet/core/blob/master/.gitignore
