@@ -9,3 +9,4 @@ Ninject gebruiken voor dependency injection: https://dev.to/cwetanow/wiring-up-n
 Gebruik DataSetExtensions voor syntactic sugar in de automapper: https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto/35418320
 Logica van Excel naar DataSet in een apart project stoppen om het te isoleren voor unit testing.
 Maak .gitignore voor .NET Core: https://github.com/dotnet/core/blob/master/.gitignore
+Github repo maken en pushen: https://github.com/martiendejong/DotNETCoreAPIMapExcelToObject
