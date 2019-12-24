@@ -10,3 +10,9 @@ Gebruik DataSetExtensions voor syntactic sugar in de automapper: https://stackov
 Logica van Excel naar DataSet in een apart project stoppen om het te isoleren voor unit testing.
 Maak .gitignore voor .NET Core: https://github.com/dotnet/core/blob/master/.gitignore
 Github repo maken en pushen: https://github.com/martiendejong/DotNETCoreAPIMapExcelToObject
+
+TODO:
+Unit tests
+Opschonen code
+Tweede ExcelMapper class toevoegen die niet met Automapper werkt maar met een config file en reflection, om aan te tonen dat dit onderhoudbaarder is
+Openen in VS 2019 en kijken wat er beter kan
