@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DotNETCoreAPIMapExcelToObject.Models;
 using ExcelDataReader;
+using ExcelDataReader.Exceptions;
 using ExcelToObject;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,70 +18,44 @@ namespace DotNETCoreAPIMapExcelToObject.Controllers
     [ApiController]
     public class MapExcelToObjectController : ControllerBase
     {
-        private readonly IMapper Mapper;
-
         private readonly IExcelToObject ExcelToDataSet;
 
-        public MapExcelToObjectController(IMapper mapper, IExcelToObject excelToDataSet)
+        public MapExcelToObjectController(IExcelToObject excelToDataSet)
         {
-            Mapper = mapper;
             ExcelToDataSet = excelToDataSet;
         }
 
         [HttpPost]
-        public async Task<IActionResult> MapFileAsync(IFormFile file)
+        public IActionResult MapFile(IFormFile file)
         {
-            IActionResult result;
-            
             if (file.Length == 0)
             {
-                result = BadRequest("File is empty");
+                return BadRequest("File is empty");
             }
-            else if (!file.FileName.EndsWith(".xlsx"))
+            if (!file.FileName.EndsWith(".xlsx"))
             {
-                result = BadRequest("File extension must be xlsx");
+                return BadRequest("File extension must be xlsx");
             }
-            else
+
+            try
             {
-                try
-                {
-                    IEnumerable<MappedObject> resultObjects;
-                    using (var stream = file.OpenReadStream())
-                    {
-                        resultObjects = ExcelToDataSet.MapToObjects<MappedObject>(stream);
-                    }
+                return Ok(DoMapFile(file));
+            }
+            catch (ExcelToObjectException exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
-                    /*DataSet dataSet;
-
-                    using (var stream = file.OpenReadStream())
-                    {
-                        //dataSet = ExcelToDataSet.GetDataSet(stream);
-
-                        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-                        IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                        ExcelDataSetConfiguration config = new ExcelDataSetConfiguration()
-                        {
-                            ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
-                            {
-                                UseHeaderRow = true
-                            }
-                        };
-
-                        DataSet dataSet = excelReader.AsDataSet(config);
-                        IEnumerable<MappedObject> resultObjects = Mapper.Map<IEnumerable<MappedObject>>(dataSet);
-                    }
-                    IEnumerable<MappedObject> resultObjects = Mapper.Map<IEnumerable<MappedObject>>(dataSet);*/
-
-                    result = Ok(resultObjects);
-                }
-                catch (Exception exception)
-                {
-                    throw;
-                }
+        private IEnumerable<MappedObject> DoMapFile(IFormFile file)
+        {
+            IEnumerable<MappedObject> resultObjects;
+            using (var stream = file.OpenReadStream())
+            {
+                resultObjects = ExcelToDataSet.MapToObjects<MappedObject>(stream);
             }
 
-            return result;
+            return resultObjects;
         }
     }
 }

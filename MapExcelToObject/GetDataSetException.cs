@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ExcelToObject
 {
-    public class GetDataSetException : Exception
+    public class ExcelToObjectException : Exception
     {
+        public ExcelToObjectException(string message) : base(message)
+        {
+        }
     }
 }
