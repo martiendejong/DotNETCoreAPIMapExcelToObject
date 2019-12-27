@@ -36,6 +36,9 @@
     <None Update="AnotherMappedObject.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Opdrachtomschrijving.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="README.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

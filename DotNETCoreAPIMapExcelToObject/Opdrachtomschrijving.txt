@@ -1,0 +1,18 @@
+﻿Deze site is een programmeeropdracht van Opinity, gemaakt door Martien de Jong.
+
+De opdrachtomschrijving luidt als volgt:
+
+Een .NET Core (minimaal versie 2) API project met Swagger (UI) ondersteuning waarmee je (via Swagger) een Exel (XLSX) bestand kunt  uploaden.
+Deze API moet het bestand vervolgens dynamisch kunnen omzetten naar een object structuur waarbij de mappings tussen Excel en object structuur simpel in code aan te passen moeten zijn (van kolom naar veld).
+In deze API moet gebruikt gemaakt worden van Dependency Injection.
+
+
+Op deze pagina bevinden zich twee API-functies waarbij een Excel XLSX-bestand geupload kan worden.
+Hiermee kunnen twee versies van het conversiemechanisme getest worden.
+
+De code van dit project valt in te zien op Github. Hier vindt u ook enkele XLSX-bestanden om mee te testen.
+https://github.com/martiendejong/DotNETCoreAPIMapExcelToObject 
+
+Ook kan de opdracht online bekeken worden:
+http://mapexceltoobject.azurewebsites.net/ 
+

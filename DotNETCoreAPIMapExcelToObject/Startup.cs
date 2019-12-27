@@ -50,7 +50,7 @@ namespace DotNETCoreAPIMapExcelToObject
                 {
                     Version = "v1",
                     Title = "MapExcelToObject",
-                    Description = File.ReadAllText("README.md").Replace(Environment.NewLine, Environment.NewLine + " " + Environment.NewLine),
+                    Description = File.ReadAllText("Opdrachtomschrijving.txt"),
                     Contact = new OpenApiContact
                     {
                         Name = "Martien de Jong",
