@@ -18,15 +18,31 @@ namespace DotNETCoreAPIMapExcelToObject.Controllers
     [ApiController]
     public class MapExcelToObjectController : ControllerBase
     {
-        private readonly IExcelToObject ExcelToDataSet;
+        private readonly IExcelToObject<MappedObject> ExcelToMappedObject;
 
-        public MapExcelToObjectController(IExcelToObject excelToDataSet)
+        private readonly IExcelToObject<AnotherMappedObject> ExcelToAnoterMappedObject;
+
+        public MapExcelToObjectController(IExcelToObject<MappedObject> excelToMappedObject, IExcelToObject<AnotherMappedObject> excelToAnotherMappedObject)
         {
-            ExcelToDataSet = excelToDataSet;
+            ExcelToMappedObject = excelToMappedObject;
+            ExcelToAnoterMappedObject = excelToAnotherMappedObject;
         }
 
         [HttpPost]
-        public IActionResult MapFile(IFormFile file)
+        [Route("Object")]
+        public IActionResult MapFileToObject(IFormFile file)
+        {
+            return HandleMapFileRequest(file, stream => ExcelToMappedObject.MapToObjects(stream));
+        }        
+
+        [HttpPost]
+        [Route("AnotherObject")]
+        public IActionResult MapFileToAnotherObject(IFormFile file)
+        {
+            return HandleMapFileRequest(file, stream => ExcelToAnoterMappedObject.MapToObjects(stream));
+        }
+
+        private IActionResult HandleMapFileRequest<MappedObjectType>(IFormFile file, Func<Stream, IEnumerable<MappedObjectType>> mapFunction)
         {
             if (file.Length == 0)
             {
@@ -39,7 +55,7 @@ namespace DotNETCoreAPIMapExcelToObject.Controllers
 
             try
             {
-                return Ok(DoMapFile(file));
+                return Ok(DoMapFile(file, mapFunction));
             }
             catch (ExcelToObjectException exception)
             {
@@ -47,12 +63,12 @@ namespace DotNETCoreAPIMapExcelToObject.Controllers
             }
         }
 
-        private IEnumerable<MappedObject> DoMapFile(IFormFile file)
+        private IEnumerable<MappedObjectType> DoMapFile<MappedObjectType>(IFormFile file, Func<Stream, IEnumerable<MappedObjectType>> mapFunction)
         {
-            IEnumerable<MappedObject> resultObjects;
+            IEnumerable<MappedObjectType> resultObjects;
             using (var stream = file.OpenReadStream())
             {
-                resultObjects = ExcelToDataSet.MapToObjects<MappedObject>(stream);
+                resultObjects = mapFunction(stream);
             }
 
             return resultObjects;

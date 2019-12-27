@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DotNETCoreAPIMapExcelToObject.Models;
 using DotNETCoreAPIMapExcelToObject.Ninject;
 using ExcelToObject;
 using Microsoft.AspNetCore.Builder;
@@ -48,7 +50,7 @@ namespace DotNETCoreAPIMapExcelToObject
                 {
                     Version = "v1",
                     Title = "MapExcelToObject",
-                    Description = "A programming assignment for Opinity",
+                    Description = File.ReadAllText("README.md").Replace(Environment.NewLine, Environment.NewLine + " " + Environment.NewLine),
                     Contact = new OpenApiContact
                     {
                         Name = "Martien de Jong",
@@ -146,12 +148,13 @@ namespace DotNETCoreAPIMapExcelToObject
         // Ninject bindings
         public void ConfigureBindings(IKernel kernel)
         {
-            kernel.Bind<IMapper>().ToMethod(ctx => new Mapper(CreateConfiguration())).InSingletonScope();
-            kernel.Bind<IExcelToObject>().To<ExcelToObjectMapper>().InSingletonScope();
+            kernel.Bind<IMapper>().ToMethod(ctx => new Mapper(CreateMapperConfiguration())).InSingletonScope();
+            kernel.Bind<IExcelToObject<MappedObject>>().To<ExcelToObjectMapper<MappedObject>>().InSingletonScope();
+            kernel.Bind<IExcelToObject<AnotherMappedObject>>().To<ExcelToObjectConfigFileMapper<AnotherMappedObject>>().InSingletonScope();
         }
 
         // Automapper configuration
-        private MapperConfiguration CreateConfiguration()
+        private MapperConfiguration CreateMapperConfiguration()
         {
             var config = new MapperConfiguration(cfg =>
             {

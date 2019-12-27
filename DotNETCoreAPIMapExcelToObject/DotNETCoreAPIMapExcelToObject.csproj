@@ -32,4 +32,17 @@
     <ProjectReference Include="..\MapExcelToObject\ExcelToObject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="AnotherMappedObject.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy ..\README.md .\README.md" />
+  </Target>
+
 </Project>

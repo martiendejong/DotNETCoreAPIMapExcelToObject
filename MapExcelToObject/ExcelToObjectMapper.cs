@@ -9,9 +9,9 @@ using System.Text;
 
 namespace ExcelToObject
 {
-    public class ExcelToObjectMapper : IExcelToObject
+    public class ExcelToObjectMapper<MappedObjectType> : IExcelToObject<MappedObjectType>
     {
-        private readonly ExcelDataSetConfiguration Configuration = new ExcelDataSetConfiguration()
+        private static readonly ExcelDataSetConfiguration Configuration = new ExcelDataSetConfiguration()
         {
             ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
             {
@@ -33,7 +33,7 @@ namespace ExcelToObject
             return excelReader.AsDataSet(Configuration);
         }
 
-        public IEnumerable<MappedObjectType> MapToObjects<MappedObjectType>(Stream xlsxStream)
+        public IEnumerable<MappedObjectType> MapToObjects(Stream xlsxStream)
         {
             try
             {

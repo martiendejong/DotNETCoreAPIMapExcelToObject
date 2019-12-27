@@ -4,10 +4,10 @@ using System.IO;
 
 namespace ExcelToObject
 {
-    public interface IExcelToObject
+    public interface IExcelToObject<MappedObjectType>
     {
         DataSet GetDataSet(Stream xlsxStream);
 
-        IEnumerable<MappedObjectType> MapToObjects<MappedObjectType>(Stream xlsxStream);
+        IEnumerable<MappedObjectType> MapToObjects(Stream xlsxStream);
     }
 }

@@ -27,6 +27,9 @@
     <None Update="ExcelToObjectMapperTestFiles\kolommen tekst en getal bestaan niet.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelToObjectMapperTestFiles\MappedObject.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelToObjectMapperTestFiles\sheet Blad1 bestaat niet.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
