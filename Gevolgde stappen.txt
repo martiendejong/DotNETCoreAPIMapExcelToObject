@@ -14,6 +14,7 @@ Deployment items: https://stackoverflow.com/questions/3738819/do-mstest-deployme
 Azure publish naar http://mapexceltoobject.azurewebsites.net/
 Ini parser: https://github.com/rickyah/ini-parser
 
-TODO:
-Tweede ExcelMapper class toevoegen die niet met Automapper werkt maar met een config file en reflection, om aan te tonen dat dit onderhoudbaarder is
-Omschrijvingen aanpassen
+Doorontwikkeling:
+Meerdere objecten uit meerdere sheets kunnen lezen.
+Referenties tussen objecten.
+NuGet package maken.
